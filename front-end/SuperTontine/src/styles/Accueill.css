@@ -41,6 +41,7 @@ header{
 	box-shadow: -3px -3px 7px #ffffff73,
 	2px 2px 5px rgba(94, 104, 121, 0.288);
 	background-color: #ffffff;
+	
 }
 .logo img{
 	max-width: 100%;
@@ -50,7 +51,7 @@ header{
 }
 
 .logotext{
-	transform: translateX(-300%) ;
+	transform: translateX(-270%) ;
 	
 }
 
@@ -434,6 +435,8 @@ header.sticky{
 		--big-font: 3.2rem;
 		--h2-font: 2.2rem;
 	}
+
+
 }
 
 @media (max-width: 760px){
