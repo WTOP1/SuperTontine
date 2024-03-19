@@ -1,6 +1,8 @@
 import React from 'react'
 import '../styles/Home.css'
 
+import Slider from './slider'
+
 export default function Home() {
   return (
     <div>
@@ -21,6 +23,7 @@ export default function Home() {
                 <span className="card-pin-hidden">**** **** **** </span>
                 <span>1234</span>
             </div>
+           
             <div className="card-logo-wrapper">
 
                 <div className="card-logo">
@@ -29,7 +32,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    </div>
+      </div>
 
       </div>
       <div className=' card Transaction'>
@@ -39,7 +42,9 @@ export default function Home() {
 
       </div>
       </div>
-
+      <div className='slider-tontine'>
+        <Slider/>
+      </div>
     </div>
   )
 }

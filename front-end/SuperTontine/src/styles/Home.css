@@ -1,13 +1,27 @@
+.slider-tontine{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+ 
+  border-radius: 15px;
+}
+
+
+
 .card{
     background: #ffffff;
     border-radius: 17px;
     width: 30%;
     margin: auto ;
-    height: 220px;
+    height: 170px;
+    padding: 1%;
 }
 
 .info{
     display: flex;
+    border-bottom: solid 2px #2675cf;
+    padding-bottom: 1%;
 }
 
 /* grid c1 */
@@ -18,10 +32,10 @@
   .grid-c1-content {
     background: linear-gradient(
         114.07deg,
-        rgba(66, 59, 55, 0.6) 3.49%,
-        rgba(66, 59, 55, 0) 34.7%
+        rgba(26, 70, 95, 0.801) 3.49%,
+        rgba(61, 147, 218, 0.541) 34.7%
       ),
-      linear-gradient(138.58deg, rgba(59, 43, 30, 0.37) 43.56%, #fea767 112.68%);
+      linear-gradient(138.58deg, rgba(59, 43, 30, 0.37) 43.56%, #67b5fe 112.68%);
     flex: 1;
     border-radius: 10px;
     padding: 16px;
