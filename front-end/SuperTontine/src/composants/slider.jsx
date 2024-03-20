@@ -36,7 +36,11 @@ export default function Slider() {
 
     arrowBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        carousel.scrollLeft += btn.id === 'left' ? -firstCardWidth : firstCardWidth;
+        if (btn.id === 'left') {
+          carousel.scrollLeft -= firstCardWidth;
+        } else {
+          carousel.scrollLeft += firstCardWidth;
+        }
       });
     });
 
@@ -88,9 +92,7 @@ export default function Slider() {
 
     return () => {
       arrowBtns.forEach(btn => {
-        btn.removeEventListener('click', () => {
-          carousel.scrollLeft += btn.id === 'left' ? -firstCardWidth : firstCardWidth;
-        });
+        btn.removeEventListener('click');
       });
       carousel.removeEventListener('mousedown', dragStart);
       carousel.removeEventListener('mousemove', dragging);
@@ -107,7 +109,7 @@ export default function Slider() {
         <div className='titre'>
           <h1> Mes tontines</h1>
         </div>
-      <i ><box-icon type='solid' color='blue' name='chevron-left'></box-icon></i>
+      <i id="left" ><box-icon type='solid' color='blue' name='chevron-left'></box-icon></i>
       <ul class="carousel" ref={carouselRef}>
         <li class="card">
           <div class="img"> </div>
@@ -140,7 +142,7 @@ export default function Slider() {
           <span>14 membres</span>
         </li>
       </ul>
-      <i ><box-icon type='solid' color='blue' name='chevron-right'></box-icon></i>
+      <i id="right"><box-icon type='solid' color='blue' name='chevron-right'></box-icon></i>
     </div>
     </div>
   );
