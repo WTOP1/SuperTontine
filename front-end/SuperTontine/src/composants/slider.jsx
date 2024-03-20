@@ -1,7 +1,9 @@
 import React from 'react'
 import '../styles/slider.css'
 import 'boxicons';
+import {Link} from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
+
 
 
 export default function Slider() {
@@ -92,7 +94,9 @@ export default function Slider() {
 
     return () => {
       arrowBtns.forEach(btn => {
-        btn.removeEventListener('click');
+        btn.removeEventListener('click', () => {
+          carousel.scrollLeft += btn.id === 'left' ? -firstCardWidth : firstCardWidth;
+        });
       });
       carousel.removeEventListener('mousedown', dragStart);
       carousel.removeEventListener('mousemove', dragging);
@@ -115,31 +119,37 @@ export default function Slider() {
           <div class="img"> </div>
           <h2>Tontine_1</h2> <br />
           <span>50 membres </span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
         <li class="card">
           <div class="img"> </div>
           <h2>Tontine_2</h2> <br />
           <span>25 membres</span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
         <li class="card">
           <div class="img"> </div>
           <h2>Tontine_3</h2> <br />
           <span>50 membres</span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
         <li class="card">
           <div class="img"> </div>
           <h2>Tontine_4</h2> <br />
           <span>30 memebres</span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
         <li class="card">
           <div class="img"> </div>
           <h2>Tontine_5</h2>
           <span>45 membres</span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
         <li class="card">
           <div class="img"> </div>
           <h2>Tontine_6</h2>
           <span>14 membres</span>
+          <button className='btn' > <Link to="/home/tontine"> voir plus </Link> </button>
         </li>
       </ul>
       <i id="right"><box-icon type='solid' color='blue' name='chevron-right'></box-icon></i>
