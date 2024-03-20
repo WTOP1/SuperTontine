@@ -48,10 +48,8 @@ export default function Main() {
                     <nav className={`navbar ${isMenuOpen ? 'active' : ''}`}>
                         <NavLink  className="a" to="/home/accueil">home</NavLink>
                         <Link onClick={toggleHome}  className="a" to="/home/settings">paramètre</Link>
-                        
+            
                         <Link onClick={toggleHome} className="a" to="/home/transactions">Transactions</Link>
-                        <Link onClick={toggleHome} className="a" to="/home/tontine">Tontine</Link>
-
                     </nav>
                     <div className={`notification ${isNotification ? 'activ' : ''}`}>
                         <h2>Notifications</h2>
