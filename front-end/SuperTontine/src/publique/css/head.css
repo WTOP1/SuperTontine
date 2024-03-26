@@ -1,0 +1,50 @@
+#icone{
+	color:#38b6ff;
+	right:40px ;
+	top: 15%;
+	position: absolute;
+	font-size: 40px;
+}
+.space{
+	margin-right: 50px;
+}
+#recherche{
+	position: absolute;
+	width: 50%;
+	left: 25%;
+	top: 7%;
+	border: 1px #38b6ff solid ;
+	border-radius: 50px;
+	height: 70%;
+	margin-bottom:100px;
+	font-family: Chakra Petch;
+	font-size: 15px;
+	padding-left: 20px;
+}
+
+.champ{
+	border-bottom:1px #38b6ff solid;
+	width: 70%;
+	position: relative;
+	padding-bottom: 20px;
+}
+#nom{
+	border: none;
+}
+.entete{
+	position: fixed;
+	width: 100%;
+	height: 12%;
+	background-color: white;
+	box-shadow: -3px 3px 10px 3px gray;
+	top: 1%;
+	left: 0px;
+	z-index: 1000000000000000;
+
+}
+#logo{
+	width: 100px;
+	height: 100%;	
+	position: relative;
+	margin-bottom: 20px;
+}

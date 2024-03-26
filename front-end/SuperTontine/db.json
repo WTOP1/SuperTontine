@@ -1,0 +1,96 @@
+{
+  "Utilisateurs": [
+    {
+      "id": "3dbb",
+      "email": "booalbert60@gmail.com",
+      "password": "12345",
+      "fullname": "albert",
+      "confirmedpassword": "12345"
+    }
+  ],
+  "Tontines": [
+    {
+      "id": "ca0b",
+      "name": "supertontine",
+      "description": "",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "50000",
+      "withdrawrules": "",
+      "withdrawalrulesArray": "chaque personne dois payer avec les fraisde retrait",
+      "participants": "50"
+    },
+    {
+      "id": "59ac",
+      "name": "tontine japoma",
+      "description": "Tontine des jeunes habitants de japoma",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "40"
+    },
+    {
+      "id": "59ab",
+      "name": "tontine bell",
+      "description": "Tontine des jeunes bell",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "25"
+    },
+    {
+      "id": "59ad",
+      "name": "tontine makepe",
+      "description": "Tontine des jeunes habitants de japoma",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "29"
+    },
+    {
+      "id": "58ac",
+      "name": "tontine yassa",
+      "description": "Tontine des jeunes habitants de yassa",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "50"
+    },
+    {
+      "id": "57ac",
+      "name": "tontine Nyalla",
+      "description": "Tontine des jeunes habitants de japoma",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "100"
+    },
+    {
+      "id": "56ac",
+      "name": "tontine ndogbong",
+      "description": "Tontine de developpement de ndogbong",
+      "DateDebut": "2024-03-30",
+      "frequency": "7",
+      "contributionAmount": "50000",
+      "securityAmount": "25000",
+      "withdrawalrulesArray": "",
+      "participants": "25"
+    }
+  ],
+  "Transactions": [],
+  "Participants": [],
+  "Wallet":[],
+  "Wallet-securise":[],
+  "participation":[]
+}
