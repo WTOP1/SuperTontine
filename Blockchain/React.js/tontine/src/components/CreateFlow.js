@@ -30,6 +30,7 @@ async function createNewFlow(recipient, flowRate) {
 
   console.log(signer);
   console.log(await superSigner.getAddress());
+  
   const maticx = await sf.loadSuperToken("MATICx");
 
   console.log(maticx);
