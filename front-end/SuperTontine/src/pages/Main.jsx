@@ -19,7 +19,6 @@ export default function Main() {
     const [isNotification, setIsnotification] = useState(false)
     const [isHome, setIsHome] = useState(true);
 
-
     const toggleHome = () =>{
         setIsHome(false);
     }
