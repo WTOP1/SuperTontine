@@ -4,6 +4,30 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import '../styles/login.css';
+import 'boxicons';
+import {getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB4rHcCC1YlUBHriD9wxJVundMDiwB3p5k",
+  authDomain: "supertontine-a5296.firebaseapp.com",
+  projectId: "supertontine-a5296",
+  storageBucket: "supertontine-a5296.appspot.com",
+  messagingSenderId: "219328670504",
+  appId: "1:219328670504:web:e8454a73d33699219e3e1d",
+  measurementId: "G-LGTCEKZR97"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app)
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +35,19 @@ function Login() {
         if(sessionStorage.getItem("Utilisateurs")){
           navigate("/home")
         }
+  })
+
+  //Se connecter avec un compte google
+ const  signInGoogleBtn = ()=>{
+    signInWithRedirect(auth, new GoogleAuthProvider()).catch((err) =>{
+      console.log(err.message)
+    })
+  }
+
+  // l'état de l'utilisateur
+
+  onAuthStateChanged(auth, (user)=>{
+
   })
 
   const { register, handleSubmit } = useForm();
@@ -30,19 +67,13 @@ function Login() {
       if (data.password !== data.confirmedpassword) {
         toast.error("Les mots de passe ne correspondent pas");
       } else {
-        axios.get(`http://localhost:3001/Utilisateurs?email=${data.email}`).then((res) => {
-          if (res.data.length > 0) {
-            toast.error("Un compte existe déjà avec cette adresse email");
-          } else {
-            axios.post("http://localhost:3001/Utilisateurs", data).then((res) => {
-              toast.success("Inscription réussie");
-              setSignUpClicked(false);
-            }).catch((err) => {
-              console.log(err);
-              toast.error("Une erreur est survenue lors de l'inscription");
-            });
-          }
-        });
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+        .then((cred)=>{
+          console.log("L'utilisateur a été inscript: ", cred.user)
+        })
+        .catch((err)=>{
+          console.log(err.message);
+        })
       }
     } else {
       // Soumission du formulaire de connexion
@@ -117,7 +148,7 @@ function Login() {
                   {isSignUpClicked ? (
                     <>
                       <input type="submit" value="S'inscrire" className="forms_buttons-action" />
-                      <button type="button" className="forms_buttons-forgot" onClick={handleLoginClick}>Annuler</button>
+                      <div className='google' onClick={signInGoogleBtn}> <box-icon name='google' size="md" color="#004aad" type='logo'  animation='tada-hover' ></box-icon> </div>
                     </>
                   ) : (
                     <>
@@ -125,6 +156,7 @@ function Login() {
                         <button type="button" className="forms_buttons-forgot">Mot de passe oublié</button>
                       </Link>
                       <input type="submit" value="Se connecter" className="forms_buttons-action" />
+                      <div className='google' onClick={signInGoogleBtn}> <box-icon border='square' name='google' size='lg' color="#004aad" type='logo'  animation='tada-hover' ></box-icon> </div>
                     </>
                   )}
                 </div>

@@ -10,18 +10,6 @@
   ],
   "Tontines": [
     {
-      "id": "ca0b",
-      "name": "supertontine",
-      "description": "",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "50000",
-      "withdrawrules": "",
-      "withdrawalrulesArray": "chaque personne dois payer avec les fraisde retrait",
-      "participants": "50"
-    },
-    {
       "id": "59ac",
       "name": "tontine japoma",
       "description": "Tontine des jeunes habitants de japoma",
@@ -31,17 +19,6 @@
       "securityAmount": "25000",
       "withdrawalrulesArray": "",
       "participants": "40"
-    },
-    {
-      "id": "59ab",
-      "name": "tontine bell",
-      "description": "Tontine des jeunes bell",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "25000",
-      "withdrawalrulesArray": "",
-      "participants": "25"
     },
     {
       "id": "59ad",
@@ -55,42 +32,20 @@
       "participants": "29"
     },
     {
-      "id": "58ac",
-      "name": "tontine yassa",
-      "description": "Tontine des jeunes habitants de yassa",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "25000",
-      "withdrawalrulesArray": "",
+      "id": "22ca",
+      "name": "tontine d'épargne",
+      "description": "Une tontine pour faciliter l'épargne des jeunes camerounais",
+      "DateDebut": "2024-03-31",
+      "frequency": "5",
+      "contributionAmount": "500000",
+      "securityAmount": "250000",
+      "withdrawalrulesArray": "indemnité de 25000 pour ceux qui ne payent pas à temos",
       "participants": "50"
-    },
-    {
-      "id": "57ac",
-      "name": "tontine Nyalla",
-      "description": "Tontine des jeunes habitants de japoma",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "25000",
-      "withdrawalrulesArray": "",
-      "participants": "100"
-    },
-    {
-      "id": "56ac",
-      "name": "tontine ndogbong",
-      "description": "Tontine de developpement de ndogbong",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "25000",
-      "withdrawalrulesArray": "",
-      "participants": "25"
     }
   ],
   "Transactions": [],
   "Participants": [],
-  "Wallet":[],
-  "Wallet-securise":[],
-  "participation":[]
+  "Wallet": [],
+  "Wallet-securise": [],
+  "participation": []
 }

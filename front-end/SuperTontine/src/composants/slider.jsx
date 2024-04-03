@@ -6,7 +6,6 @@ import '../styles/slider.css';
 export default function Slider() {
   const wrapperRef = useRef(null);
   const carouselRef = useRef(null);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [tontinedata, setTontinedata] = useState([]);
 
   useEffect(() => {
@@ -20,18 +19,28 @@ export default function Slider() {
     };
 
     fetchTontines();
+  }, []);
 
+  const handleScroll = () => {
     const carousel = carouselRef.current;
+    const scrollLeft = carousel.scrollLeft;
+    const scrollWidth = carousel.scrollWidth;
+    const clientWidth = carousel.clientWidth;
 
-    const handleAutoPlay = () => {
-      if (window.innerWidth < 800 || !isAutoPlay) return;
-      carousel.scrollLeft += carousel.offsetWidth;
-    };
+    if (scrollLeft === 0) {
+      // Move to the end of the carousel
+      carousel.scrollLeft = scrollWidth - clientWidth * 2;
+    } else if (scrollLeft + clientWidth >= scrollWidth) {
+      // Move to the start of the carousel
+      carousel.scrollLeft = clientWidth;
+    }
+  };
 
-    const intervalId = setInterval(handleAutoPlay, 1500);
-
-    return () => clearInterval(intervalId);
-  }, [isAutoPlay]);
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    carousel.addEventListener('scroll', handleScroll);
+    return () => carousel.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="wrapper" ref={wrapperRef}>
