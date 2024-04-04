@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import '../styles/login.css';
 import 'boxicons';
-import {getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth'
+import {getAuth,signOut, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -47,8 +47,12 @@ function Login() {
   // l'état de l'utilisateur
 
   onAuthStateChanged(auth, (user)=>{
-
+    if(user){
+    navigate("/home")
+    }
   })
+
+
 
   const { register, handleSubmit } = useForm();
   const [isSignUpClicked, setSignUpClicked] = useState(false);
@@ -60,7 +64,7 @@ function Login() {
   const handleLoginClick = () => {
     setSignUpClicked(false);
   };
-
+const formu = useRef(null);
   const onSubmit = (data) => {
     if (isSignUpClicked) {
       // Soumission du formulaire d'inscription
@@ -69,25 +73,37 @@ function Login() {
       } else {
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then((cred)=>{
-          console.log("L'utilisateur a été inscript: ", cred.user)
+          toast.success("inscription reussie")
+          
+          setSignUpClicked(false);
         })
         .catch((err)=>{
-          console.log(err.message);
+
+          if(err.message==="Firebase: Error (auth/email-already-in-use)."){
+            toast.error("ce mail est déjà utiliser");
+          }
+          else{
+          if(err.message==="Firebase: Password should be at least 6 characters (auth/weak-password)."){
+            toast.error("le mot de passe doit contenir aumoins 6 caractères");
+          }else{
+            toast.error(err.message);
+          }            
+          }
+
         })
       }
     } else {
       // Soumission du formulaire de connexion
+        signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((cred) =>{
+          toast.success("connexion réussite");
+          
+        })
+        .catch((err)=>{
+          console.log(err.message)
+          toast.error("informations de connexion incorrectes")
 
-      axios.get(`http://localhost:3001/Utilisateurs?email=${data.email}&password=${data.password}`).then((res) => {
-        if (res.data.length > 0) {
-          toast.success("Connexion réussie");
-          localStorage.setItem("Utilisateurs", JSON.stringify(res.data[0]))
-          sessionStorage.setItem("Utilisateurs", JSON.stringify(res.data[0]))
-          navigate("/home");
-        } else {
-          toast.error("Les identifiants sont incorrects");
-        }
-      });
+        })
     }
   };
 
@@ -112,16 +128,8 @@ function Login() {
             <img src="./assets/img/supertontine2_no_bg.png" className="logo" alt="logo"></img>
             <div className={isSignUpClicked ? 'user_forms-signup' : "user_forms-login"}>
               <h2 className="forms_title">{isSignUpClicked ? 'S\'inscrire' : 'Se connecter'}</h2>
-              <form className="forms_form" onSubmit={handleSubmit(onSubmit)}>
-              {isSignUpClicked ?       <div className="forms_field">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className="forms_field-input"
-                  required
-                  {...register("fullname", { required: "Veuillez entrer votre nom complet" })}
-                />
-              </div> : ""}
+              <form className="forms_form" ref={{formu}} onSubmit={handleSubmit(onSubmit)}>
+
               {isSignUpClicked ?       <div className="forms_field">
                 <input
                   type="email"

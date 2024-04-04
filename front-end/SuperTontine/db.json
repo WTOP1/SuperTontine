@@ -10,36 +10,14 @@
   ],
   "Tontines": [
     {
-      "id": "59ac",
-      "name": "tontine japoma",
-      "description": "Tontine des jeunes habitants de japoma",
-      "DateDebut": "2024-03-30",
+      "id": "5297",
+      "name": "Supertontine",
+      "description": "Tontine des membres de la supertontine",
+      "DateDebut": "2024-04-30",
       "frequency": "7",
       "contributionAmount": "50000",
       "securityAmount": "25000",
-      "withdrawalrulesArray": "",
-      "participants": "40"
-    },
-    {
-      "id": "59ad",
-      "name": "tontine makepe",
-      "description": "Tontine des jeunes habitants de japoma",
-      "DateDebut": "2024-03-30",
-      "frequency": "7",
-      "contributionAmount": "50000",
-      "securityAmount": "25000",
-      "withdrawalrulesArray": "",
-      "participants": "29"
-    },
-    {
-      "id": "22ca",
-      "name": "tontine d'épargne",
-      "description": "Une tontine pour faciliter l'épargne des jeunes camerounais",
-      "DateDebut": "2024-03-31",
-      "frequency": "5",
-      "contributionAmount": "500000",
-      "securityAmount": "250000",
-      "withdrawalrulesArray": "indemnité de 25000 pour ceux qui ne payent pas à temos",
+      "withdrawalrulesArray": "Les participants ne payant pas leur contribution, dans le temps imparti recevront une amende de 10%",
       "participants": "50"
     }
   ],
