@@ -47,7 +47,40 @@ function Login() {
 
   //Se connecter avec un compte google
  const  signInGoogleBtn = ()=>{
-    signInWithRedirect(auth, new GoogleAuthProvider()).catch((err) =>{
+    signInWithRedirect(auth, new GoogleAuthProvider())
+      .then((cred) => {
+      const user = auth.currentUser;
+      console.log(user.email);
+      if (user) {
+        // Obtenir le jeton d'identification Firebase
+        user.getIdToken(true)
+          .then((idToken) => {
+            console.log(idToken);
+            // Envoyer le jeton d'identification au backend pour l'échange JWT
+            axios.post('http://localhost:8080/login', {idToken: idToken })
+              .then((response) => {
+                const { token } = response.data;
+                if(!token){
+                  //si le back-end n'envoie aucun token
+                  toast.error("échec lors de la connexion")
+
+                }
+                else{
+                // Stocker le jeton JWT en toute sécurité (expliqué plus tard)
+                localStorage.setItem('token', token);
+                toast.success("connexion réussie");
+                navigate('/home');
+              }})
+              .catch((error) => {
+                console.error(error);
+              });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    })
+    .catch((err) =>{
       console.log(err.message)
       if(err.message ==="Firebase: Error (auth/network-request-failed)."){
         toast.error("Veuillez vérifier votre connexion internet");
@@ -105,20 +138,29 @@ const formu = useRef(null);
       // Soumission du formulaire de connexion
       signInWithEmailAndPassword(auth, data.email, data.password)
       .then((cred) => {
-        toast.success("connexion réussite");
         const user = auth.currentUser;
+        console.log(user.email);
         if (user) {
           // Obtenir le jeton d'identification Firebase
           user.getIdToken(true)
             .then((idToken) => {
+              console.log(idToken);
               // Envoyer le jeton d'identification au backend pour l'échange JWT
-              axios.post('/login', { idToken })
+              axios.post('http://localhost:8080/login', {idToken: idToken })
                 .then((response) => {
                   const { token } = response.data;
+                  console.log(token)
+                  if(!token){
+                    //si le back-end n'envoie aucun token
+                    toast.error("échec lors de la connexion")
+  
+                  }
+                  else{
                   // Stocker le jeton JWT en toute sécurité (expliqué plus tard)
                   localStorage.setItem('token', token);
+                  toast.success("connexion réussie");
                   navigate('/home');
-                })
+                }})
                 .catch((error) => {
                   console.error(error);
                 });

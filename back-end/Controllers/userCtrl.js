@@ -24,6 +24,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     const { idToken } = req.body;
+    console.log(req.body);
     const secret = 'SUPERTONTINE_SECRET_KEY'
     try {
       const decodedToken = await fb.auth().verifyIdToken(idToken);
@@ -33,6 +34,7 @@ exports.login = async (req, res, next) => {
       const token = jwt.sign({ uid }, secret, { expiresIn: '1h' });
   
       res.json({ token });
+      console.log(token)
     } catch (error) {
       console.error(error);
       res.status(401).send('Jeton d\'identification invalide');

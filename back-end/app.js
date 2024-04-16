@@ -1,5 +1,6 @@
 const express = require('express');
 // const mongoose = require('mongoose');
+
 const app = express();
 const cors = require('cors');
 const tontineCtrl = require('./Controllers/tontineCtrl')
@@ -10,15 +11,18 @@ const fb = require('./firebaseConfig')
 
 //middlewares
 app.use(express.json())
+app.use(cors({
+    origin: ['http://localhost:3000'], // Replace with your frontend origin
+    credentials: true // Allow cookies for authentication
+  }))
 app.use(express.urlencoded({extended: true}))
 
 
 
 app.post('/createtontine', tontineCtrl.create);
 app.post('/createuser', userCtrl.signup);
+app.post('/login', userCtrl.login);
 app.post('/jointontine', auth, tontineCtrl.join);
-
-
 
 
 
