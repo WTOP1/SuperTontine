@@ -5,7 +5,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import '../styles/login.css';
 import 'boxicons';
-import {getAuth,signOut, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  getAuth,
+  signOut, 
+  signInWithRedirect, 
+  GoogleAuthProvider, 
+  onAuthStateChanged, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword 
+} from 'firebase/auth'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -41,11 +49,13 @@ function Login() {
  const  signInGoogleBtn = ()=>{
     signInWithRedirect(auth, new GoogleAuthProvider()).catch((err) =>{
       console.log(err.message)
+      if(err.message ==="Firebase: Error (auth/network-request-failed)."){
+        toast.error("Veuillez vérifier votre connexion internet");
+      }
     })
   }
 
   // l'état de l'utilisateur
-
   onAuthStateChanged(auth, (user)=>{
     if(user){
     navigate("/home")
@@ -77,8 +87,7 @@ const formu = useRef(null);
           
           setSignUpClicked(false);
         })
-        .catch((err)=>{
-
+        .catch((err) =>{
           if(err.message==="Firebase: Error (auth/email-already-in-use)."){
             toast.error("ce mail est déjà utiliser");
           }
@@ -94,16 +103,36 @@ const formu = useRef(null);
       }
     } else {
       // Soumission du formulaire de connexion
-        signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((cred) =>{
-          toast.success("connexion réussite");
-          
-        })
-        .catch((err)=>{
-          console.log(err.message)
-          toast.error("informations de connexion incorrectes")
-
-        })
+      signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((cred) => {
+        toast.success("connexion réussite");
+        const user = auth.currentUser;
+        if (user) {
+          // Obtenir le jeton d'identification Firebase
+          user.getIdToken(true)
+            .then((idToken) => {
+              // Envoyer le jeton d'identification au backend pour l'échange JWT
+              axios.post('/login', { idToken })
+                .then((response) => {
+                  const { token } = response.data;
+                  // Stocker le jeton JWT en toute sécurité (expliqué plus tard)
+                  localStorage.setItem('token', token);
+                  navigate('/home');
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error("informations de connexion incorrectes");
+      });
+    
     }
   };
 
